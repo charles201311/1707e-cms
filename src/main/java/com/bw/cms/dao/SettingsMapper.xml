@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bw.cms.dao.SettingsMapper" >
+  <resultMap id="BaseResultMap" type="com.bw.cms.domain.Settings" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="site_domain" property="siteDomain" jdbcType="VARCHAR" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="article_list_size" property="articleListSize" jdbcType="INTEGER" />
+    <result column="slide_size" property="slideSize" jdbcType="INTEGER" />
+    <result column="admin_username" property="adminUsername" jdbcType="VARCHAR" />
+    <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, site_domain, site_name, article_list_size, slide_size, admin_username, admin_password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_settings
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_settings
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bw.cms.domain.Settings" >
+    insert into cms_settings (id, site_domain, site_name, 
+      article_list_size, slide_size, admin_username, 
+      admin_password)
+    values (#{id,jdbcType=INTEGER}, #{siteDomain,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, 
+      #{articleListSize,jdbcType=INTEGER}, #{slideSize,jdbcType=INTEGER}, #{adminUsername,jdbcType=VARCHAR}, 
+      #{adminPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bw.cms.domain.Settings" >
+    insert into cms_settings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteDomain != null" >
+        site_domain,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="articleListSize != null" >
+        article_list_size,
+      </if>
+      <if test="slideSize != null" >
+        slide_size,
+      </if>
+      <if test="adminUsername != null" >
+        admin_username,
+      </if>
+      <if test="adminPassword != null" >
+        admin_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="siteDomain != null" >
+        #{siteDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleListSize != null" >
+        #{articleListSize,jdbcType=INTEGER},
+      </if>
+      <if test="slideSize != null" >
+        #{slideSize,jdbcType=INTEGER},
+      </if>
+      <if test="adminUsername != null" >
+        #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bw.cms.domain.Settings" >
+    update cms_settings
+    <set >
+      <if test="siteDomain != null" >
+        site_domain = #{siteDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleListSize != null" >
+        article_list_size = #{articleListSize,jdbcType=INTEGER},
+      </if>
+      <if test="slideSize != null" >
+        slide_size = #{slideSize,jdbcType=INTEGER},
+      </if>
+      <if test="adminUsername != null" >
+        admin_username = #{adminUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bw.cms.domain.Settings" >
+    update cms_settings
+    set site_domain = #{siteDomain,jdbcType=VARCHAR},
+      site_name = #{siteName,jdbcType=VARCHAR},
+      article_list_size = #{articleListSize,jdbcType=INTEGER},
+      slide_size = #{slideSize,jdbcType=INTEGER},
+      admin_username = #{adminUsername,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
