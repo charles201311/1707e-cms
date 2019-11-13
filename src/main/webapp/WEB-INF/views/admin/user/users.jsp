@@ -66,7 +66,7 @@
 		</table>
 
 
-		<jsp:include page="/WEB-INF/views/common/pages.jsp" />
+		<jsp:include page="/WEB-INF/views/common/pages.jsp" ><jsp:param value="users" name="url"/></jsp:include>
 
 	</div>
 

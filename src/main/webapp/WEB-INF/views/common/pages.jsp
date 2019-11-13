@@ -5,16 +5,16 @@
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item"><a class="page-link" href="#"
-				data="/users?page=${info.prePage==0?1:info.prePage }"
+				data="/${param.url }?page=${info.prePage==0?1:info.prePage }"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<c:forEach items="${nums}" var="n">
 				<li class="page-item"><a class="page-link" href="#"
-					data="/users?page=${n}">${n}</a></li>
+					data="/${param.url }?page=${n}">${n}</a></li>
 			</c:forEach>
 
 			<li class="page-item"><a class="page-link" href="#"
-				data="/users?page=${info.nextPage ==0?info.pages:info.nextPage}"
+				data="/${param.url }?page=${info.nextPage ==0?info.pages:info.nextPage}"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>

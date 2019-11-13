@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function query() {
 		//在中间区域加载用户页面
-		$("#center").load("/users?username=" + $("[name='username']").val());
+		$("#center").load("/articles?title=" + $("[name='title']").val());
 	}
 </script>
 </head>
@@ -59,7 +59,7 @@
 		</table>
 
 
-		<jsp:include page="/WEB-INF/views/common/pages.jsp" />
+		<jsp:include page="/WEB-INF/views/common/pages.jsp" ><jsp:param value="articles" name="url"/></jsp:include>
 
 	</div>
 
