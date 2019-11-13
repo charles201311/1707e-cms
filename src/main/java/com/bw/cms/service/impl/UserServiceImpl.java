@@ -25,4 +25,15 @@ public class UserServiceImpl implements UserService {
 		return new PageInfo<User>(users);
 	}
 
+	@Override
+	public boolean update(User user) {
+		try {
+			userMapper.updateByPrimaryKeySelective(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("操作失败");
+		}
+	}
+
 }

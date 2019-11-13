@@ -2,15 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>用户列表</title>
-
+<script type="text/javascript" src="/resource/js/cms.js"></script>
 <script type="text/javascript">
 	function query() {
-      //在中间区域加载用户页面
+		//在中间区域加载用户页面
 		$("#center").load("/users?username=" + $("[name='username']").val());
 	}
 </script>
@@ -25,7 +26,7 @@
 				onclick="query()">查询</button>
 		</div>
 		<table class="table table-hover  table-bordered">
-			<thead class="thead-dark">
+			<thead class="thead-light">
 				<tr>
 					<th>序号</th>
 					<th>用户名</th>
@@ -40,7 +41,7 @@
 			<tbody>
 				<c:forEach items="${users}" var="u" varStatus="i">
 					<tr>
-						<td>${i.index+1 }</td>
+						<td>${(info.pageNum-1) * info.pageSize+i.index+1 }</td>
 						<td>${u.username }</td>
 						<td>${u.nickname }</td>
 						<td>${u.gender==0?"男":"女" }</td>
@@ -50,7 +51,12 @@
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td><fmt:formatDate value="${u.updated }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td>启用</td>
+						<td><c:if test="${u.locked==0 }">
+								<button type="button" class="btn btn-success" onclick="update(this,${u.id})">正常</button>
+							</c:if> <c:if test="${u.locked==1 }">
+								<button  type="button" class="btn btn-danger" onclick="update(this,${u.id})">停用</button>
+
+							</c:if></td>
 					</tr>
 
 
@@ -58,6 +64,33 @@
 			</tbody>
 
 		</table>
+
+
+		<jsp:include page="/WEB-INF/views/common/pages.jsp" />
+
 	</div>
+
+ <script type="text/javascript">
+  function update(obj,id){
+	  //0:正常 1:停用
+	  //如果当前状态为正常,则改为停用.如果是停用则改为正常
+	
+	  var locked =$(obj).text()=="正常"?"1":"0";
+	 
+	  $.post("/update",{id:id,locked:locked},function(flag){
+        if(flag){
+        //	alert("操作成功");
+        	$(obj).text(locked==1?"禁用":"正常");//先改变按钮内容
+        	$(obj).attr("class",locked=="0"?"btn btn-success":"btn btn-danger")//改变按钮颜色
+        }else{
+        	alert("操作失败")
+        }		  
+	  })
+	  
+  }
+ 
+ 
+ </script>
+
 </body>
 </html>

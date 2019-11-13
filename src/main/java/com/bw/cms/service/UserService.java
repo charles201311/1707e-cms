@@ -14,5 +14,7 @@ public interface UserService {
 	 * @return: List<User>
 	 */
 	 PageInfo<User> selects(User user,Integer page,Integer pageSize);
+
+	  boolean update(User user);
 	
 }

@@ -26,9 +26,21 @@
     id, title, picture, channel_id, category_id, user_id, hits, hot, status, deleted, 
     created, updated, content_type, keywords, original
   </sql>
+  
+  
   <sql id="Blob_Column_List" >
     content, summary
   </sql>
+  
+  <select id="selects" resultMap="BaseResultMap">
+  
+  select <include refid="Base_Column_List"/> from cms_article
+  
+  </select>
+  
+  
+  
+  
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
