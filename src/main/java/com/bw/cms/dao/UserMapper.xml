@@ -18,6 +18,20 @@
     id, username, password, nickname, birthday, gender, locked, created, updated, role, 
     url
   </sql>
+  <select id="selects" resultMap="BaseResultMap">
+  
+  select  <include refid="Base_Column_List"/>  from cms_user
+   <where>
+     <if test="username!=null and username!=''">
+      username like "%"#{username}"%"
+     
+     </if>
+   
+   </where>
+  
+  
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

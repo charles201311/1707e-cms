@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+label{
+	font-weight: normal;
+}
+ol,ol li{padding: 0;margin: 0}
+
+.navbar{
+	border-bottom: 1px solid #F2F2F2;
+	padding: .2rem 1rem;
+}
+.split{
+	border-left: 2px solid #E1EFFF;
+}
+.min_h_500{
+	min-height: 30rem;
+}
+.article_title{
+	font-size: 1.4rem;
+}
+.channel{
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.channel .active{
+	color: red;
+}
+
+.banner {
+	height: 150px;
+	background-image: url("/resource/images/bg01.jpg");
+	background-position: center center;
+}
+.my_banner {
+	height: 100px;
+	background-image: url("/resource/images/bg05.jpg");
+	background-position: center center;
+}
+.red{color: red;}
+.footer {
+	background-color: #f2f2f2;
+	padding: 5px;
+}
+
+.passport_bg {
+	min-height: 400px;
+	background-image: url("/resource/images/bg01.jpg");
+	background-position: center;
+}
+.passport_panel{
+	max-width: 400px;
+	margin-top: -40px;
+	margin-left: 50px;
+}
+.passport_r{
+	margin-top: 40px;
+	color: white;
+}
+.avatar{
+	margin-top: -150px;
+}
+.cms-list-group-item-action:hover {
+  z-index: 1;
+  text-decoration: none;
+  background-color: #b0ae4f;
+}
+.cms-list-group-item-action:hover a {
+  text-decoration: none;
+  color:#ffffff;
+}
+
+.cms-list-group-item-active {
+  z-index: 2;
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #007bff;
+}
+
