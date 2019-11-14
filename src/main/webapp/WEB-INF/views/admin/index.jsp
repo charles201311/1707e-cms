@@ -29,10 +29,10 @@
 			<div class="col-md-2" style="padding-top: 20px;background-color: #eceaea;">
 				<ul class="navbar">
 					<li class="navbar-brand"> <a class="nav-link"
-						href="/index"><span class="oi oi-monitor">&nbsp;后台首页</a></li>
+						href="/admin/index"><span class="oi oi-monitor">&nbsp;后台首页</a></li>
 					<li class="navbar-brand"> <a class="nav-link"
-						href="#" data="/users"><span class="oi oi-star">&nbsp;用户管理</a></li>
-					<li class="navbar-brand"><a class="nav-link" href="#" data="/articles"><span class="oi oi-sun">&nbsp;文章管理</a></li>
+						href="#" data="/user/users"><span class="oi oi-star">&nbsp;用户管理</a></li>
+					<li class="navbar-brand"><a class="nav-link" href="#" data="/article/articles"><span class="oi oi-sun">&nbsp;文章管理</a></li>
 					<li class="navbar-brand"><a class="nav-link" href="#"><span class="oi oi-paperclip">&nbsp;友情链接</a></li>
 					<li class="navbar-brand"><a class="nav-link" href="#"><span class="oi oi-zoom-in">&nbsp;分类管理</a></li>
 					<li class="navbar-brand"><a class="nav-link " href="#"><span class="oi oi-wrench">&nbsp;系统设置</a></li>

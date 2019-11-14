@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.druid.stat.TableStat.Mode;
 import com.bw.cms.domain.User;
 import com.bw.cms.service.UserService;
-import com.bw.cms.utils.PageUtil;
 import com.github.pagehelper.PageInfo;
-
+@RequestMapping("user")
 @Controller
 public class UserController {
 	

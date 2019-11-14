@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function query() {
 		//在中间区域加载用户页面
-		$("#center").load("/users?username=" + $("[name='username']").val());
+		$("#center").load("/user/users?username=" + $("[name='username']").val());
 	}
 </script>
 </head>
@@ -52,9 +52,11 @@
 						<td><fmt:formatDate value="${u.updated }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td><c:if test="${u.locked==0 }">
-								<button type="button" class="btn btn-success" onclick="update(this,${u.id})">正常</button>
+								<button type="button" class="btn btn-success"
+									onclick="update(this,${u.id})">正常</button>
 							</c:if> <c:if test="${u.locked==1 }">
-								<button  type="button" class="btn btn-danger" onclick="update(this,${u.id})">停用</button>
+								<button type="button" class="btn btn-danger"
+									onclick="update(this,${u.id})">停用</button>
 
 							</c:if></td>
 					</tr>
@@ -64,20 +66,28 @@
 			</tbody>
 
 		</table>
-
-
-		<jsp:include page="/WEB-INF/views/common/pages.jsp" ><jsp:param value="users" name="url"/></jsp:include>
+        <!-- 引入分页信息 -->
+		<jsp:include page="/WEB-INF/views/common/pages.jsp"/>
 
 	</div>
 
- <script type="text/javascript">
+	<script type="text/javascript">
+ 
+ 
+ function goPage(page){
+	 var url ="/user/users?page="+page+"&username="+$("[name='username']").val();
+	 //在中间区域加载分页页面
+	 $("#center").load(url);
+	 
+ }
+ 
   function update(obj,id){
 	  //0:正常 1:停用
 	  //如果当前状态为正常,则改为停用.如果是停用则改为正常
 	
 	  var locked =$(obj).text()=="正常"?"1":"0";
 	 
-	  $.post("/update",{id:id,locked:locked},function(flag){
+	  $.post("/user/update",{id:id,locked:locked},function(flag){
         if(flag){
         //	alert("操作成功");
         	$(obj).text(locked==1?"禁用":"正常");//先改变按钮内容

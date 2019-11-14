@@ -1,271 +1,307 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bw.cms.dao.ArticleMapper" >
-  <resultMap id="BaseResultMap" type="com.bw.cms.domain.Article" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="picture" property="picture" jdbcType="VARCHAR" />
-    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
-    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="hits" property="hits" jdbcType="INTEGER" />
-    <result column="hot" property="hot" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="deleted" property="deleted" jdbcType="INTEGER" />
-    <result column="created" property="created" jdbcType="TIMESTAMP" />
-    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
-    <result column="content_type" property="contentType" jdbcType="INTEGER" />
-    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
-    <result column="original" property="original" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.bw.cms.domain.ArticleWithBLOBs" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, title, picture, channel_id, category_id, user_id, hits, hot, status, deleted, 
-    created, updated, content_type, keywords, original
-  </sql>
-  
-  
-  <sql id="Blob_Column_List" >
-    content, summary
-  </sql>
-  
-  <select id="selects" resultMap="BaseResultMap">
-  
-  select <include refid="Base_Column_List"/> from cms_article
-  
-  </select>
-  
-  
-  
-  
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from cms_article
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from cms_article
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.bw.cms.domain.ArticleWithBLOBs" >
-    insert into cms_article (id, title, picture, 
-      channel_id, category_id, user_id, 
-      hits, hot, status, 
-      deleted, created, updated, 
-      content_type, keywords, original, 
-      content, summary)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{channelId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{hits,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, 
-      #{contentType,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR}, #{original,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR}, #{summary,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.bw.cms.domain.ArticleWithBLOBs" >
-    insert into cms_article
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="picture != null" >
-        picture,
-      </if>
-      <if test="channelId != null" >
-        channel_id,
-      </if>
-      <if test="categoryId != null" >
-        category_id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="hits != null" >
-        hits,
-      </if>
-      <if test="hot != null" >
-        hot,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="deleted != null" >
-        deleted,
-      </if>
-      <if test="created != null" >
-        created,
-      </if>
-      <if test="updated != null" >
-        updated,
-      </if>
-      <if test="contentType != null" >
-        content_type,
-      </if>
-      <if test="keywords != null" >
-        keywords,
-      </if>
-      <if test="original != null" >
-        original,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="summary != null" >
-        summary,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="channelId != null" >
-        #{channelId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="hits != null" >
-        #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="hot != null" >
-        #{hot,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null" >
-        #{deleted,jdbcType=INTEGER},
-      </if>
-      <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null" >
-        #{updated,jdbcType=TIMESTAMP},
-      </if>
-      <if test="contentType != null" >
-        #{contentType,jdbcType=INTEGER},
-      </if>
-      <if test="keywords != null" >
-        #{keywords,jdbcType=VARCHAR},
-      </if>
-      <if test="original != null" >
-        #{original,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="summary != null" >
-        #{summary,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bw.cms.domain.ArticleWithBLOBs" >
-    update cms_article
-    <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        picture = #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="channelId != null" >
-        channel_id = #{channelId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="hits != null" >
-        hits = #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="hot != null" >
-        hot = #{hot,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="deleted != null" >
-        deleted = #{deleted,jdbcType=INTEGER},
-      </if>
-      <if test="created != null" >
-        created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null" >
-        updated = #{updated,jdbcType=TIMESTAMP},
-      </if>
-      <if test="contentType != null" >
-        content_type = #{contentType,jdbcType=INTEGER},
-      </if>
-      <if test="keywords != null" >
-        keywords = #{keywords,jdbcType=VARCHAR},
-      </if>
-      <if test="original != null" >
-        original = #{original,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="summary != null" >
-        summary = #{summary,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bw.cms.domain.ArticleWithBLOBs" >
-    update cms_article
-    set title = #{title,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=VARCHAR},
-      channel_id = #{channelId,jdbcType=INTEGER},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      hits = #{hits,jdbcType=INTEGER},
-      hot = #{hot,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      deleted = #{deleted,jdbcType=INTEGER},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP},
-      content_type = #{contentType,jdbcType=INTEGER},
-      keywords = #{keywords,jdbcType=VARCHAR},
-      original = #{original,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR},
-      summary = #{summary,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bw.cms.domain.Article" >
-    update cms_article
-    set title = #{title,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=VARCHAR},
-      channel_id = #{channelId,jdbcType=INTEGER},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      hits = #{hits,jdbcType=INTEGER},
-      hot = #{hot,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      deleted = #{deleted,jdbcType=INTEGER},
-      created = #{created,jdbcType=TIMESTAMP},
-      updated = #{updated,jdbcType=TIMESTAMP},
-      content_type = #{contentType,jdbcType=INTEGER},
-      keywords = #{keywords,jdbcType=VARCHAR},
-      original = #{original,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.bw.cms.dao.ArticleMapper">
+	<resultMap id="BaseResultMap"
+		type="com.bw.cms.domain.Article">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="picture" property="picture" jdbcType="VARCHAR" />
+		<result column="channel_id" property="channelId"
+			jdbcType="INTEGER" />
+		<result column="category_id" property="categoryId"
+			jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="hits" property="hits" jdbcType="INTEGER" />
+		<result column="hot" property="hot" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="deleted" property="deleted" jdbcType="INTEGER" />
+		<result column="created" property="created"
+			jdbcType="TIMESTAMP" />
+		<result column="updated" property="updated"
+			jdbcType="TIMESTAMP" />
+		<result column="content_type" property="contentType"
+			jdbcType="INTEGER" />
+		<result column="keywords" property="keywords"
+			jdbcType="VARCHAR" />
+		<result column="original" property="original"
+			jdbcType="VARCHAR" />
+		<!-- 作者 -->
+	  <association property="user" javaType="user" select="com.bw.cms.dao.UserMapper.selectByPrimaryKey" column="user_id"></association>		
+	  <association property="channel" javaType="channel" select="com.bw.cms.dao.ChannelMapper.selectByPrimaryKey" column="channel_id"></association>		
+	  <association property="category" javaType="category" select="com.bw.cms.dao.CategoryMapper.selectByPrimaryKey" column="category_id"></association>		
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.bw.cms.domain.ArticleWithBLOBs" extends="BaseResultMap">
+		<result column="content" property="content"
+			jdbcType="LONGVARCHAR" />
+		<result column="summary" property="summary"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, title, picture, channel_id, category_id, user_id, hits, hot, status,
+		deleted,
+		created, updated, content_type, keywords, original
+	</sql>
+
+
+	<sql id="Blob_Column_List">
+		content, summary
+	</sql>
+	<!-- 查询所有的文章 -->
+	<select id="selects" resultMap="BaseResultMap">
+
+		select
+		  <include refid="Base_Column_List" />
+		from cms_article 
+		<where>
+			<if test="title!=null and title!=''">
+				title like "%" #{title} "%"
+			</if>
+			<if test="status!=null">
+			 and  status =#{status}
+			</if>
+
+		</where>
+	</select>
+
+
+
+
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from cms_article
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from cms_article
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
+		insert into cms_article (id, title, picture,
+		channel_id, category_id, user_id,
+		hits, hot, status,
+		deleted, created, updated,
+		content_type, keywords, original,
+		content, summary)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{picture,jdbcType=VARCHAR},
+		#{channelId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{hits,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER},
+		#{deleted,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP},
+		#{contentType,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR},
+		#{original,jdbcType=VARCHAR},
+		#{content,jdbcType=LONGVARCHAR}, #{summary,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
+		insert into cms_article
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="picture != null">
+				picture,
+			</if>
+			<if test="channelId != null">
+				channel_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="hits != null">
+				hits,
+			</if>
+			<if test="hot != null">
+				hot,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="deleted != null">
+				deleted,
+			</if>
+			<if test="created != null">
+				created,
+			</if>
+			<if test="updated != null">
+				updated,
+			</if>
+			<if test="contentType != null">
+				content_type,
+			</if>
+			<if test="keywords != null">
+				keywords,
+			</if>
+			<if test="original != null">
+				original,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="summary != null">
+				summary,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="picture != null">
+				#{picture,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				#{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="hits != null">
+				#{hits,jdbcType=INTEGER},
+			</if>
+			<if test="hot != null">
+				#{hot,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="deleted != null">
+				#{deleted,jdbcType=INTEGER},
+			</if>
+			<if test="created != null">
+				#{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updated != null">
+				#{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentType != null">
+				#{contentType,jdbcType=INTEGER},
+			</if>
+			<if test="keywords != null">
+				#{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="original != null">
+				#{original,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
+		update cms_article
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="picture != null">
+				picture = #{picture,jdbcType=VARCHAR},
+			</if>
+			<if test="channelId != null">
+				channel_id = #{channelId,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="hits != null">
+				hits = #{hits,jdbcType=INTEGER},
+			</if>
+			<if test="hot != null">
+				hot = #{hot,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted,jdbcType=INTEGER},
+			</if>
+			<if test="created != null">
+				created = #{created,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updated != null">
+				updated = #{updated,jdbcType=TIMESTAMP},
+			</if>
+			<if test="contentType != null">
+				content_type = #{contentType,jdbcType=INTEGER},
+			</if>
+			<if test="keywords != null">
+				keywords = #{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="original != null">
+				original = #{original,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="summary != null">
+				summary = #{summary,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
+		update cms_article
+		set title = #{title,jdbcType=VARCHAR},
+		picture = #{picture,jdbcType=VARCHAR},
+		channel_id = #{channelId,jdbcType=INTEGER},
+		category_id = #{categoryId,jdbcType=INTEGER},
+		user_id = #{userId,jdbcType=INTEGER},
+		hits = #{hits,jdbcType=INTEGER},
+		hot = #{hot,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		deleted = #{deleted,jdbcType=INTEGER},
+		created = #{created,jdbcType=TIMESTAMP},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		content_type = #{contentType,jdbcType=INTEGER},
+		keywords = #{keywords,jdbcType=VARCHAR},
+		original = #{original,jdbcType=VARCHAR},
+		content = #{content,jdbcType=LONGVARCHAR},
+		summary = #{summary,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.bw.cms.domain.Article">
+		update cms_article
+		set title = #{title,jdbcType=VARCHAR},
+		picture = #{picture,jdbcType=VARCHAR},
+		channel_id = #{channelId,jdbcType=INTEGER},
+		category_id = #{categoryId,jdbcType=INTEGER},
+		user_id = #{userId,jdbcType=INTEGER},
+		hits = #{hits,jdbcType=INTEGER},
+		hot = #{hot,jdbcType=INTEGER},
+		status = #{status,jdbcType=INTEGER},
+		deleted = #{deleted,jdbcType=INTEGER},
+		created = #{created,jdbcType=TIMESTAMP},
+		updated = #{updated,jdbcType=TIMESTAMP},
+		content_type = #{contentType,jdbcType=INTEGER},
+		keywords = #{keywords,jdbcType=VARCHAR},
+		original = #{original,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bw.cms.dao.ArticleMapper;
 import com.bw.cms.domain.Article;
+import com.bw.cms.domain.ArticleWithBLOBs;
 import com.bw.cms.service.ArticleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,6 +25,22 @@ public class ArticleServiceImpl implements ArticleService {
 		List<Article> articles = articleMapper.selects(article);
 		
 		return new PageInfo<Article>(articles);
+	}
+
+	@Override
+	public boolean update(ArticleWithBLOBs article) {
+		try {
+			return articleMapper.updateByPrimaryKeySelective(article)>0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("修改失败");
+		}
+	}
+
+	@Override
+	public ArticleWithBLOBs selectByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return articleMapper.selectByPrimaryKey(id);
 	}
 
 }
