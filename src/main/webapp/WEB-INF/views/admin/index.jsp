@@ -13,8 +13,9 @@
 <!-- 	<link rel="stylesheet" type="text/css"
 	href="/resource/open-iconic/font/css/open-iconic-bootstrap.css" /> -->
 <script type="text/javascript" src="/resource/js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="/resource/js/bootstrap.min.js"></script>
 
+
+<script type="text/javascript" src="/resource/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -22,7 +23,21 @@
 			<div class="col-md-12" style="background-color: #000">
 			  <img alt="" src="/resource/images/logo.jpg" class="rounded-circle">
 			 <a class="navbar-brand mr-1" href="index.html">CMS系统后台</a>
-
+	<div class="dropdown" style="padding-top: 0.4rem;">
+							<a href="#" class="nav-link dropdown-toggle" role="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <c:out
+									value="${user.username}" default="cms-User" />
+							</a>
+							<div class="dropdown-menu dropdown-menu-left"
+								aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="/my/">个人主页</a> <a
+									class="dropdown-item" href="#">个人设置</a> <a
+									class="dropdown-item" href="#">我的文章</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/passport/logout">退出</a>
+							</div>
+						</div>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 5px;min-height: 500px;">

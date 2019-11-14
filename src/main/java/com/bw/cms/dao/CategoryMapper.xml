@@ -9,6 +9,14 @@
   <sql id="Base_Column_List" >
     id, name, channel_id
   </sql>
+  
+  <select id="selectsByChannelId" resultMap="BaseResultMap">
+  
+  select <include refid="Base_Column_List"/> from cms_category where channel_id=#{channelId}
+  
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

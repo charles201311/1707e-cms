@@ -16,7 +16,7 @@
  */
 
 //文件保存目录路径
-String savePath = pageContext.getServletContext().getRealPath("/") + "/pic/";
+String savePath = pageContext.getServletContext().getRealPath("/") + "/resource/pic/";
 System.out.println("===================================>"+savePath);
 //String savePath ="d:/pic/";
 //文件保存目录URL
