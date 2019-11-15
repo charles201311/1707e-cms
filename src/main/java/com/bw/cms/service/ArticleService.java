@@ -19,4 +19,14 @@ public interface ArticleService {
 	boolean  update(ArticleWithBLOBs article);
 	
 	ArticleWithBLOBs selectByPrimaryKey(Integer id);
+	
+	/**
+	 * 
+	 * @Title: insertSelective 
+	 * @Description: 发布文章
+	 * @param record
+	 * @return
+	 * @return: boolean
+	 */
+	 boolean insertSelective(ArticleWithBLOBs record);
 }

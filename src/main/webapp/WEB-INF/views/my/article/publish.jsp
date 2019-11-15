@@ -50,7 +50,7 @@
 <body>
 
 
-	<form name="example" method="post" action="demo.jsp">
+	<form id="form1">
 		<div class="form-group">
 			<label for="title">文章标题:</label> <input
 				class="form-control form-control-sm" id="title" type="text"
@@ -58,33 +58,63 @@
 		</div>
 		<div class="form-group">
 			<textarea name="content1" cols="100" rows="8"
-				style="width: 825px; height: 250px; visibility: hidden;"><%=htmlspecialchars(htmlData)%></textarea>
+				style="width: 100%; height: 250px; visibility: hidden;"><%=htmlspecialchars(htmlData)%></textarea>
 			<br />
 
 		</div>
 		<div class="form-group form-inline">
 
-			所属栏目: <select class="form-control form-control-sm" id="channel">
+			所属栏目: <select class="form-control form-control-sm" id="channel"
+				name="channelId">
 				<option value="-1">请选择</option>
 
-			</select> 所属分类: <select class="form-control form-control-sm" id="category">
+			</select> 所属分类: <select class="form-control form-control-sm" id="category"
+				name="categoryId">
 				<option>请选择</option>
 
 			</select>
-			
+
 		</div>
 		<div class="form-group">
-		 标题图片:
-		 <input type="file" name="file" class="form-control form-control-sm ">
+			标题图片: <input type="file" name="file"
+				class="form-control form-control-sm ">
 		</div>
-		
+
 		<div class="form-group">
-		  <button type="button" class="btn btn-success">发布文章</button>
-		  <button type="reset" class="btn btn-warning">重置</button>
-		
+			<button type="button" class="btn btn-success" onclick="publish()">发布文章</button>
+			<button type="reset" class="btn btn-warning">重置</button>
+
 		</div>
 	</form>
 	<script type="text/javascript">
+		//发布文章
+		function publish() {
+
+			//获取formDAta对象
+			var formData = new FormData($("#form1")[0]);
+			//单独封装富文本编辑中内容(html格式的)
+			formData.set("content", editor1.html());
+
+			$.ajax({
+				type : "post",
+				url : "/my/publish",
+				data : formData,
+				// 告诉jQuery不要去处理发送的数据
+				processData : false,
+				// 告诉jQuery不要去设置Content-Type请求头
+				contentType : false,
+				success : function(flag) {
+					if (flag) {
+						alert("发布成功");
+						location.href="/my"
+					} else {
+						alert("发布失败")
+					}
+				}
+
+			})
+		}
+
 		//栏目.分类的下拉框的赋值
 		$(function() {
 			//先查询出所有栏目

@@ -43,4 +43,14 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public boolean insertSelective(ArticleWithBLOBs record) {
+		try {
+			return articleMapper.insertSelective(record)>0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("发布失败");
+		}
+	}
+
 }

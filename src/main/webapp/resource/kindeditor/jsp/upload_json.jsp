@@ -20,7 +20,7 @@ String savePath = pageContext.getServletContext().getRealPath("/") + "/resource/
 System.out.println("===================================>"+savePath);
 //String savePath ="d:/pic/";
 //文件保存目录URL
-String saveUrl  = request.getContextPath() + "/pic/";
+String saveUrl  = request.getContextPath() + "/resource/pic/";
 //String saveUrl ="d:/pic";
 //定义允许上传的文件扩展名
 HashMap<String, String> extMap = new HashMap<String, String>();

@@ -48,7 +48,8 @@ public class UserController {
 	@RequestMapping("update")
 	@ResponseBody
 	public boolean update(User user ) {
-	  return 	userService.update(user);
+	   return 	userService.update(user);
+	 	
 		
 	}
 

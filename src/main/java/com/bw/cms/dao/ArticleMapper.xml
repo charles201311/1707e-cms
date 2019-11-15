@@ -26,9 +26,15 @@
 		<result column="original" property="original"
 			jdbcType="VARCHAR" />
 		<!-- 作者 -->
-	  <association property="user" javaType="user" select="com.bw.cms.dao.UserMapper.selectByPrimaryKey" column="user_id"></association>		
-	  <association property="channel" javaType="channel" select="com.bw.cms.dao.ChannelMapper.selectByPrimaryKey" column="channel_id"></association>		
-	  <association property="category" javaType="category" select="com.bw.cms.dao.CategoryMapper.selectByPrimaryKey" column="category_id"></association>		
+		<association property="user" javaType="user"
+			select="com.bw.cms.dao.UserMapper.selectByPrimaryKey"
+			column="user_id"></association>
+		<association property="channel" javaType="channel"
+			select="com.bw.cms.dao.ChannelMapper.selectByPrimaryKey"
+			column="channel_id"></association>
+		<association property="category" javaType="category"
+			select="com.bw.cms.dao.CategoryMapper.selectByPrimaryKey"
+			column="category_id"></association>
 	</resultMap>
 	<resultMap id="ResultMapWithBLOBs"
 		type="com.bw.cms.domain.ArticleWithBLOBs" extends="BaseResultMap">
@@ -38,7 +44,8 @@
 			jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, title, picture, channel_id, category_id, user_id, hits, hot, status,
+		id, title, picture, channel_id, category_id, user_id, hits,
+		hot, status,
 		deleted,
 		created, updated, content_type, keywords, original
 	</sql>
@@ -51,14 +58,17 @@
 	<select id="selects" resultMap="BaseResultMap">
 
 		select
-		  <include refid="Base_Column_List" />
-		from cms_article 
+		<include refid="Base_Column_List" />
+		from cms_article
 		<where>
 			<if test="title!=null and title!=''">
 				title like "%" #{title} "%"
 			</if>
 			<if test="status!=null">
-			 and  status =#{status}
+				and status =#{status}
+			</if>
+			<if test="userId!=null">
+				and user_id =#{userId}
 			</if>
 
 		</where>
@@ -84,20 +94,25 @@
 	<insert id="insert"
 		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
 		insert into cms_article (id, title, picture,
-		channel_id, category_id, user_id,
+		channel_id,
+		category_id, user_id,
 		hits, hot, status,
 		deleted, created, updated,
 		content_type, keywords, original,
 		content, summary)
-		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		values
+		(#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
 		#{picture,jdbcType=VARCHAR},
-		#{channelId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{channelId,jdbcType=INTEGER},
+		#{categoryId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
 		#{hits,jdbcType=INTEGER}, #{hot,jdbcType=INTEGER},
 		#{status,jdbcType=INTEGER},
-		#{deleted,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP},
+		#{deleted,jdbcType=INTEGER},
+		#{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP},
 		#{contentType,jdbcType=INTEGER}, #{keywords,jdbcType=VARCHAR},
 		#{original,jdbcType=VARCHAR},
-		#{content,jdbcType=LONGVARCHAR}, #{summary,jdbcType=LONGVARCHAR})
+		#{content,jdbcType=LONGVARCHAR},
+		#{summary,jdbcType=LONGVARCHAR})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.bw.cms.domain.ArticleWithBLOBs">
@@ -269,20 +284,27 @@
 		update cms_article
 		set title = #{title,jdbcType=VARCHAR},
 		picture = #{picture,jdbcType=VARCHAR},
-		channel_id = #{channelId,jdbcType=INTEGER},
-		category_id = #{categoryId,jdbcType=INTEGER},
+		channel_id =
+		#{channelId,jdbcType=INTEGER},
+		category_id =
+		#{categoryId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},
 		hits = #{hits,jdbcType=INTEGER},
 		hot = #{hot,jdbcType=INTEGER},
-		status = #{status,jdbcType=INTEGER},
+		status =
+		#{status,jdbcType=INTEGER},
 		deleted = #{deleted,jdbcType=INTEGER},
 		created = #{created,jdbcType=TIMESTAMP},
-		updated = #{updated,jdbcType=TIMESTAMP},
-		content_type = #{contentType,jdbcType=INTEGER},
-		keywords = #{keywords,jdbcType=VARCHAR},
+		updated =
+		#{updated,jdbcType=TIMESTAMP},
+		content_type =
+		#{contentType,jdbcType=INTEGER},
+		keywords =
+		#{keywords,jdbcType=VARCHAR},
 		original = #{original,jdbcType=VARCHAR},
 		content = #{content,jdbcType=LONGVARCHAR},
-		summary = #{summary,jdbcType=LONGVARCHAR}
+		summary =
+		#{summary,jdbcType=LONGVARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
@@ -290,17 +312,23 @@
 		update cms_article
 		set title = #{title,jdbcType=VARCHAR},
 		picture = #{picture,jdbcType=VARCHAR},
-		channel_id = #{channelId,jdbcType=INTEGER},
-		category_id = #{categoryId,jdbcType=INTEGER},
+		channel_id =
+		#{channelId,jdbcType=INTEGER},
+		category_id =
+		#{categoryId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},
 		hits = #{hits,jdbcType=INTEGER},
 		hot = #{hot,jdbcType=INTEGER},
-		status = #{status,jdbcType=INTEGER},
+		status =
+		#{status,jdbcType=INTEGER},
 		deleted = #{deleted,jdbcType=INTEGER},
 		created = #{created,jdbcType=TIMESTAMP},
-		updated = #{updated,jdbcType=TIMESTAMP},
-		content_type = #{contentType,jdbcType=INTEGER},
-		keywords = #{keywords,jdbcType=VARCHAR},
+		updated =
+		#{updated,jdbcType=TIMESTAMP},
+		content_type =
+		#{contentType,jdbcType=INTEGER},
+		keywords =
+		#{keywords,jdbcType=VARCHAR},
 		original = #{original,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>

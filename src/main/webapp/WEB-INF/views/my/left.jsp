@@ -10,7 +10,7 @@
 		<ul class="list-group">
 			<li id="myArticle" class="list-group-item  text-center list-group-item-info"   >
 			<a class="channel"
-				href="javascript:void(0)"  data="/my/articles"  >我的文章
+				href="javascript:void(0)"  data="/my/selectByUser"  >我的文章
 			</a></li>
 			<li class="list-group-item  text-center" ><a class="channel"
 				href="javascript:void(0)" data="/my/publish"

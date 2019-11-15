@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean update(User user) {
 		try {
+			int x=10/0;
 			userMapper.updateByPrimaryKeySelective(user);
 			return true;
 		} catch (Exception e) {
