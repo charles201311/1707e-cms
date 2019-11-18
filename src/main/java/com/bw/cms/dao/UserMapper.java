@@ -14,7 +14,15 @@ public interface UserMapper {
 	 * @return: List<User>
 	 */
 	List<User> selects(User user);
-	
+	/**
+	 * 
+	 * @Title: selectByName 
+	 * @Description: 按照用户名精确查找
+	 * @param username
+	 * @return
+	 * @return: User
+	 */
+	User selectByName(String username);
 	
     int deleteByPrimaryKey(Integer id);
 

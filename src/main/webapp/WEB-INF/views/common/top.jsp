@@ -17,7 +17,7 @@
 <div class="container-fulid">
 	<nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand" href="/" title="cms"><img alt="cms"
-			src="/resource/images/logo.jpg"  class="rounded-circle"></a>
+			src="/resource/images/logo.jpg"  class="rounded-circle" style="height: 50px"></a>
 
 		<!-- 搜索框：在专业高级二学完ElasticSearch后实现 -->
 		<form class="form-inline">

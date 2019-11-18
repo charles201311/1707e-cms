@@ -43,7 +43,7 @@ ol,ol li{padding: 0;margin: 0}
 }
 
 .passport_bg {
-	min-height: 400px;
+	min-height: 430px;
 	background-image: url("/resource/images/bg01.jpg");
 	background-position: center;
 }

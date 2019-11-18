@@ -8,8 +8,8 @@
 <div>
 	<div class="list-group">
 		<ul class="list-group">
-			<li id="myArticle" class="list-group-item  text-center list-group-item-info"   >
-			<a class="channel"
+			<li  class="list-group-item  text-center list-group-item-info"   >
+			<a id="myArticle" class="channel"
 				href="javascript:void(0)"  data="/my/selectByUser"  >我的文章
 			</a></li>
 			<li class="list-group-item  text-center" ><a class="channel"

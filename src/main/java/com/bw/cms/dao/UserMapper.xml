@@ -18,6 +18,11 @@
     id, username, password, nickname, birthday, gender, locked, created, updated, role, 
     url
   </sql>
+  <select id="selectByName" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List"/> from cms_user where username =#{username}
+  
+  </select>
+  
   <select id="selects" resultMap="BaseResultMap">
   
   select  <include refid="Base_Column_List"/>  from cms_user

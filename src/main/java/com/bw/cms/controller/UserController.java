@@ -49,8 +49,9 @@ public class UserController {
 	@ResponseBody
 	public boolean update(User user ) {
 	   return 	userService.update(user);
-	 	
 		
 	}
+	
+	
 
 }

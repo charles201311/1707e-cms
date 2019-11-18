@@ -271,7 +271,7 @@
 					  <!-- 虚拟路径 -->
 					   <contextPath>/pic/</contextPath>
 					   <!-- 物理路径 -->
-					   <resourceBase>d:/pic/</resourceBase>
+					   <resourceBase>/resource/pic/</resourceBase>
 					 </jettyWebAppContext>
 					</contextHandlers>
 					<!-- 间隔扫描时间 -->

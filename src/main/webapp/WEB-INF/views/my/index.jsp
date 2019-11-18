@@ -49,8 +49,8 @@
 	 
 	 //页面加载时让为左侧菜单默认点击 我的文章
 	  
-	// $("#myArticle").click();
-    $("#center").load("/my/articles")
+	 $("#myArticle").click();
+  //  $("#center").load("/my/articles")
 	 
      
     
