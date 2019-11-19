@@ -37,10 +37,11 @@
 				<%-- 登录显示用户菜单 --%>
 				<c:when test="${sessionScope.user != null}">
 					<li class="nav-item"><a class="nav-link" href="/my/home">
-							<img alt="" src="/resource/images/default_avatar.png"
+							<img alt="" src="/resource/images/default-.png"
 							style="max-height: 2.5rem" class="rounded img-fluid">
 					</a></li>
 					<li class="nav-item">
+	
 						<div class="dropdown" style="padding-top: 0.4rem;">
 							<a href="#" class="nav-link dropdown-toggle" role="button"
 								id="dropdownMenuButton" data-toggle="dropdown"

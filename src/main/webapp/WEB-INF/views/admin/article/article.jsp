@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function query() {
 		//在中间区域加载用户页面
-		$("#center").load("/article/articles?title=" + $("[name='title']").val());
+		$("#center").load("/admin/article/articles?title=" + $("[name='title']").val());
 	}
 </script>
 </head>
@@ -40,16 +40,16 @@
 	
 	<script type="text/javascript">
 	 function update(id,status){
-		 $.post("/article/update",{id:id,status:status},function(flag){
+		 $.post("/admin/article/update",{id:id,status:status},function(flag){
 			 if(flag){
 				 alert("操作成功") ;
-				  $("#center").load("/article/articles")
+				  $("#center").load("/admin/article/articles")
 			 }
 		 })
 		 
 	 }
 	 function back(){
-		 $("#center").load("/article/articles")
+		 $("#center").load("/admin/article/articles")
 	 }
 	
 	</script>

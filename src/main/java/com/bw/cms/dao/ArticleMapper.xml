@@ -71,7 +71,20 @@
 				and user_id =#{userId}
 			</if>
 
+			 <if test="hot!=null">
+				and hot=#{hot}
+			</if>
+			<if test="channelId!=null">
+				and channel_Id=#{channelId}
+			</if>
+			<if test="categoryId!=null">
+				and category_Id=#{categoryId}
+			</if>
+			
+			
 		</where>
+		
+		order by updated desc
 	</select>
 
 

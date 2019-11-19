@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function query() {
 		//在中间区域加载用户页面
-		$("#center").load("/user/users?username=" + $("[name='username']").val());
+		$("#center").load("/admin/user/users?username=" + $("[name='username']").val());
 	}
 </script>
 </head>
@@ -75,7 +75,7 @@
  
  
  function goPage(page){
-	 var url ="/user/users?page="+page+"&username="+$("[name='username']").val();
+	 var url ="/admin/user/users?page="+page+"&username="+$("[name='username']").val();
 	 //在中间区域加载分页页面
 	 $("#center").load(url);
 	 
@@ -87,7 +87,7 @@
 	
 	  var locked =$(obj).text()=="正常"?"1":"0";
 	 
-	  $.post("/user/update",{id:id,locked:locked},function(flag){
+	  $.post("/admin/user/update",{id:id,locked:locked},function(flag){
         if(flag){
         //	alert("操作成功");
         	$(obj).text(locked==1?"禁用":"正常");//先改变按钮内容

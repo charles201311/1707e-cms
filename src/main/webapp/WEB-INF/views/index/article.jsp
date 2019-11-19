@@ -9,12 +9,6 @@
 <meta charset="UTF-8">
 <title>文章详情</title>
 <!-- <script type="text/javascript" src="/resource/js/cms.js"></script> -->
-<script type="text/javascript">
-	function query() {
-		//在中间区域加载用户页面
-		location.href="/my";
-	}
-</script>
 </head>
 <body>
 
@@ -26,7 +20,7 @@
 			
 			<hr>
 			<dd>
-			<button type="button" class="btn btn-info" onclick="back()">返回列表</button>
+			<!-- <button type="button" class="btn btn-info" onclick="close()">关闭</button> -->
 			</dd>
 			<dd><fmt:formatDate value="${aritcle.updated }" pattern="yyyy-MM-dd HH:mm:ss"/> </dd>
 			<dd>${article.content }</dd>
@@ -37,8 +31,8 @@
 	
 	<script type="text/javascript">
 	 
-	 function back(){
-		location.href="/my"
+	 function close(){
+		this.close();
 	 }
 	
 	</script>

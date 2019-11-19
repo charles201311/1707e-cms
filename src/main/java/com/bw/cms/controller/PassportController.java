@@ -1,6 +1,7 @@
 package com.bw.cms.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,15 @@ import com.bw.cms.vo.UserVO;
 public class PassportController {
 	@Resource
 	private UserService userService;
+	
+	
+	@GetMapping("logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if(null!=session)
+		session.invalidate();
+		return "redirect:/passport/login";
+	}
 
 	/**
 	 * 
@@ -53,10 +63,12 @@ public class PassportController {
 	public String login(Model model,User user,HttpSession session) {
 		try {
 			User u = userService.login(user);
-			session.setAttribute("user", u);
+			
 			if(u.getRole().equals("1")) {//1:管理员 0:普通用户
+				session.setAttribute("admin", u);
 				return "redirect:/admin";//管理员进入管理员后台
 			}else {
+				session.setAttribute("user", u);
 				return "redirect:/my";//普通注册进入个人中心
 			}
 			

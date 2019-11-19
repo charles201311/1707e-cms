@@ -17,13 +17,40 @@
 		<!-- 配置后缀 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
+
 	<!-- 不拦截静态资源 -->
 	<mvc:default-servlet-handler />
 	<!-- mvc注解驱动 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven />
 	<!-- 文件上传的处理类 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+	<!-- 自定义拦截器 -->
+	<mvc:interceptors>
+	  <!-- 管理员后台拦截器 -->
+	 <mvc:interceptor>
+	     <!-- 拦截规则 -->
+	    <mvc:mapping path="/admin/**"/>
+	    <!-- 不拦截规则 -->
+	    <mvc:exclude-mapping path="/resource/**"/>
+	    <!-- 拦截器处理类 -->
+	    <bean class="com.bw.cms.utils.AdminInterceptor"/>
+	 
+	 </mvc:interceptor>
+	 <!-- 个人中心后台拦截器 -->
+	 <mvc:interceptor>
+	     <!-- 拦截规则 -->
+	    <mvc:mapping path="/my/**"/>
+	    <!-- 不拦截规则 -->
+	    <mvc:exclude-mapping path="/resource/**"/>
+	    <!-- 拦截器处理类 -->
+	    <bean class="com.bw.cms.utils.MyInterceptor"/>
+	 
+	 </mvc:interceptor>
+	
+	
+	
+	</mvc:interceptors>
 
 </beans>

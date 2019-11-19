@@ -18,7 +18,7 @@
   })
 	function query() {
 		//在中间区域加载用户页面
-		var url ="/article/articles?title=" + $("[name='title']").val()+"&status="+$("[name='status']").val();
+		var url ="/admin/article/articles?title=" + $("[name='title']").val()+"&status="+$("[name='status']").val();
 		$("#center").load(url);
 	}
 </script>
@@ -96,7 +96,7 @@
 	//文章详情
 	function detail(id){
 		
-		$("#center").load("/article/article?id="+id);
+		$("#center").load("/admin/article/article?id="+id);
 		
 	}
 	
@@ -104,7 +104,7 @@
 	
 	//分页
 		function goPage(page) {
-			var url = "/article/articles?page=" + page + "&title="
+			var url = "/admin/article/articles?page=" + page + "&title="
 					+ $("[name='title']").val()
 			$("#center").load(url);
 		}
@@ -116,7 +116,7 @@
 			
 			  var hot =$(obj).text()=="否"?"1":"0";
 			 
-			  $.post("/article/update",{id:id,hot:hot},function(flag){
+			  $.post("/admin/article/update",{id:id,hot:hot},function(flag){
 		        if(flag){
 		        //	alert("操作成功");
 		        	$(obj).text(hot==0?"否":"是");//先改变按钮内容
