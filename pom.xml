@@ -1,10 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.1707e</groupId>
-  <artifactId>1707e-cms</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-<!-- 定义主要版本号 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.1707e</groupId>
+	<artifactId>1707e-cms</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<!-- 定义主要版本号 -->
 	<properties>
 		<spring.version>5.1.5.RELEASE</spring.version>
 		<mybatis.version>3.4.2</mybatis.version>
@@ -263,15 +265,15 @@
 						<host>localhost</host>
 					</httpConnector>
 					<contextHandlers>
-					 <jettyWebAppContext>
-					  <!-- 虚拟路径 -->
-					   <contextPath>/pic/</contextPath>
-					   <!-- 物理路径 -->
-					   <resourceBase>D:/class/1707E_CMS/1707e-cms/src/main/webapp/resource/pic/</resourceBase>
-					 </jettyWebAppContext>
+						<jettyWebAppContext>
+							<!-- 虚拟路径 -->
+							<contextPath>/pic/</contextPath>
+							<!-- 物理路径 -->
+							<resourceBase>D:/class/1707E_CMS/1707e-cms/src/main/webapp/resource/pic/</resourceBase>
+						</jettyWebAppContext>
 					</contextHandlers>
 					<!-- 间隔扫描时间 -->
-					<scanIntervalSeconds>1</scanIntervalSeconds>
+					 <scanIntervalSeconds>1</scanIntervalSeconds>
 				</configuration>
 
 			</plugin>
@@ -292,9 +294,17 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>javarebel-maven-plugin</artifactId>
+				<version>1.0.5</version>
+				
+			</plugin>
+
+
 		</plugins>
-		
-		 
+
+
 
 	</build>
 

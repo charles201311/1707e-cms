@@ -119,12 +119,12 @@
 		  var deleted =$(obj).text()=="正常"?"1":"0";
 		 
 		  $.post("/admin/article/update",{id:id,deleted:deleted},function(flag){
-	        if(flag){
+	        if(flag.code==0){
 	        //	alert("操作成功");
 	        	$(obj).text(deleted==0?"正常":"已删除");//先改变按钮内容
 	        	$(obj).attr("class",deleted=="1"?"btn btn-danger":"btn btn-warning")//改变按钮颜色
 	        }else{
-	        	alert("操作失败")
+	        	alert(flag.msg)
 	        }		  
 		  })
 		  

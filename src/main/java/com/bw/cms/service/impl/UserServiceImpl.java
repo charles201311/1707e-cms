@@ -12,6 +12,7 @@ import com.bw.cms.dao.UserMapper;
 import com.bw.cms.domain.User;
 import com.bw.cms.service.UserService;
 import com.bw.cms.utils.CMSException;
+import com.bw.cms.utils.CMSAjaxException;
 import com.bw.cms.utils.Md5Util;
 import com.bw.cms.vo.UserVO;
 import com.github.pagehelper.PageHelper;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			 return userMapper.updateByPrimaryKeySelective(user)>0;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("操作失败");
+			throw new CMSAjaxException(1,"操作失败");
 		}
 	}
 

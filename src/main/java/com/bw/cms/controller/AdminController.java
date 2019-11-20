@@ -2,6 +2,7 @@ package com.bw.cms.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import com.bw.cms.domain.ArticleWithBLOBs;
 import com.bw.cms.domain.User;
 import com.bw.cms.service.ArticleService;
 import com.bw.cms.service.UserService;
+import com.bw.cms.utils.Result;
+import com.bw.cms.utils.ResultUtil;
 import com.github.pagehelper.PageInfo;
 
 @RequestMapping("admin")
@@ -56,8 +59,9 @@ public class AdminController {
 	 */
 	@RequestMapping("user/update")
 	@ResponseBody
-	public boolean update(User user) {
-		return userService.update(user);
+	public Result<User> update(User user) {
+		userService.update(user);//执行修改
+		return ResultUtil.success();
 
 	}
 
@@ -110,8 +114,9 @@ public class AdminController {
 	 */
 	@ResponseBody
 	@RequestMapping("article/update")
-	public boolean update(ArticleWithBLOBs article) {
-		return articleService.update(article);
+	public Result<Article> update(ArticleWithBLOBs article) {
+		articleService.update(article);
+		return  ResultUtil.success();
 	}
 
 	/**

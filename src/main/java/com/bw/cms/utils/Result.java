@@ -9,7 +9,7 @@ package com.bw.cms.utils;
  */
 public class Result<T> {
 
-    /** 错误码. */
+    /** 消息码. */
     private Integer code;
 
     /** 提示信息. */

@@ -88,12 +88,12 @@
 	  var locked =$(obj).text()=="正常"?"1":"0";
 	 
 	  $.post("/admin/user/update",{id:id,locked:locked},function(flag){
-        if(flag){
+        if(flag.code==0){
         //	alert("操作成功");
         	$(obj).text(locked==1?"禁用":"正常");//先改变按钮内容
         	$(obj).attr("class",locked=="0"?"btn btn-success":"btn btn-danger")//改变按钮颜色
         }else{
-        	alert("操作失败")
+        	alert(flag.msg)
         }		  
 	  })
 	  

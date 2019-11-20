@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bw.cms.domain.Category;
 import com.bw.cms.service.CategoryService;
+import com.bw.cms.utils.Result;
+import com.bw.cms.utils.ResultUtil;
 
 @RequestMapping("category")
 @Controller
@@ -27,8 +29,8 @@ public class CategoryController {
 	 */
 	@ResponseBody
 	@RequestMapping("selects")
-	private List<Category> selects(Integer channelId){
-		return categoryService.selectsByChannelId(channelId);
+	private Result<Category> selects(Integer channelId){
+		return ResultUtil.success(categoryService.selectsByChannelId(channelId));
 	}
 
 }

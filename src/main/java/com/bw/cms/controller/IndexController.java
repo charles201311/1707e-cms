@@ -32,11 +32,11 @@ public class IndexController {
 	@RequestMapping(value = { "", "/", "index" })
 	public String index(Article article, Model model, @RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(defaultValue = "5") Integer pageSize) {
-		
+		long s = System.currentTimeMillis();
+		System.out.println(System.currentTimeMillis());
 		article.setStatus(1);// 显示审审核过的文章
-		article.setDeleted(0);//查询未删除的
+		article.setDeleted(0);//查询未删除的  
 		// 查询出左侧栏目
-
 		List<Channel> channels = channelService.selects();
 		model.addAttribute("channels", channels);
 		//如果栏目为空则默认显示热点
@@ -69,6 +69,8 @@ public class IndexController {
 		
 		//封装查询条件
 		model.addAttribute("article", article);
+		long e = System.currentTimeMillis();
+		System.out.println(e-s);
 		return "index/index";
 	}
 	/**

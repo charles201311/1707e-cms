@@ -118,7 +118,8 @@
 		//栏目.分类的下拉框的赋值
 		$(function() {
 			//先查询出所有栏目
-			$.get("/channel/channels", function(list) {
+			$.get("/channel/channels", function(obj) {
+				var list =obj.data;
 				for ( var i in list) {
 					$("#channel").append(
 							"<option value='"+list[i].id+"'>" + list[i].name
@@ -146,7 +147,8 @@
 						//去查询栏目下的分类并赋值到下拉框
 						$.get("/category/selects", {
 							channelId : channelId
-						}, function(list) {
+						}, function(obj) {
+							var list =obj.data;
 							for ( var i in list) {
 								$("#category").append(
 										"<option value='"+list[i].id+"'>"

@@ -1,5 +1,6 @@
 package com.bw.cms.controller;
 
+import java.nio.channels.Channels;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bw.cms.domain.Channel;
 import com.bw.cms.service.ChannelService;
+import com.bw.cms.utils.Result;
+import com.bw.cms.utils.ResultUtil;
 /**
  * 
  * @ClassName: ChannelController 
@@ -33,9 +36,11 @@ public class ChannelController {
 	 */
 	@ResponseBody
 	@RequestMapping("channels")
-	public List <Channel> channels(){
+	public Result<Channel> channels(){
 		
-		return channelService.selects();
+		return	ResultUtil.success(channelService.selects());
+		
+		 
 		
 	}
 }
