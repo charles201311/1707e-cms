@@ -2,10 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+	.ex {
+		white-space: nowrap; /*不换行的*/
+		overflow: hidden;/*超出范围隐藏*/
+		text-overflow:ellipsis; /*超出用省略号 */
+	
+	}
+
+</style>
 <title>cms系统</title>
 <body>
 	<!-- top -->
@@ -50,19 +60,19 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="/pic/1.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/1.jpg" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片一</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/pic/2.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/2.jpg" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片二</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/pic/3.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/3.jpg" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片三</p>
 									</div>
@@ -164,8 +174,8 @@
 					<div class="card-header">最新文章</div>
 					<div class="card-body">
 						<c:forEach items="${lastInfo.list}" var="a">
-							<p>
-								<a href="/article?id=${a.id }" target="_blank">${a.title }</a>
+							<p class="ex"> 
+								<a href="/article?id=${a.id }" target="_blank" title="${a.title }">${a.title }</a>
 
 							</p>
 						</c:forEach>
@@ -205,7 +215,7 @@
 	<script type="text/javascript">
 		//分页
 		function goPage(page) {
-			var url = "/?page=" + page
+			var url = "/?page=" + page+"&channelId="+'${article.channelId}'
 			location = url;
 		}
 	</script>

@@ -10,14 +10,15 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/resource/css/cms.css?v=1.1" />
-	<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="/resource/css/jquery/screen.css" />
 
-	
+
 <div class="container-fulid">
 	<nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand" href="/" title="cms"><img alt="cms"
-			src="/resource/images/logo.jpg"  class="rounded-circle" style="height: 50px"></a>
+			src="/resource/images/logo.jpg" class="rounded-circle"
+			style="height: 50px"></a>
 
 		<!-- 搜索框：在专业高级二学完ElasticSearch后实现 -->
 		<form class="form-inline">
@@ -32,39 +33,35 @@
 			</div>
 		</form>
 		<!-- 右边登录注册 -->
-		<ul class="nav">
-			<c:choose>
-				<%-- 登录显示用户菜单 --%>
-				<c:when test="${sessionScope.user != null}">
-					<li class="nav-item"><a class="nav-link" href="/my/home">
-							<img alt="" src="/resource/images/default-.png"
-							style="max-height: 2.5rem" class="rounded img-fluid">
-					</a></li>
-					<li class="nav-item">
-	
-						<div class="dropdown" style="padding-top: 0.4rem;">
-							<a href="#" class="nav-link dropdown-toggle" role="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <c:out
-									value="${user.username}" default="cms-User" />
-							</a>
-							<div class="dropdown-menu dropdown-menu-left"
-								aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="/my/">个人主页</a> <a
-									class="dropdown-item" href="#">个人设置</a> <a
-									class="dropdown-item" href="#">我的文章</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="/passport/logout">退出</a>
-							</div>
-						</div>
-					</li>
-				</c:when>
-				<c:otherwise>
+
+		<c:choose>
+			<%-- 登录显示用户菜单 --%>
+			<c:when test="${sessionScope.user != null}">
+				<div class="btn-group dropleft">
+					<button type="button" class="btn btn-info dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						${sessionScope.user.username }</button>
+					<div class="dropdown-menu" style="left: -88px">
+						<ul class="nav" style="margin-right: 50px">
+							<li class="nav-item"><a class="nav-link"
+								href="/my/">个人中心</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/passport/logout">注销</a></li>
+						</ul>
+
+					</div>
+				</div>
+
+			</c:when>
+			<c:otherwise>
+				<ul class="nav" style="margin-right: 50px">
 					<%-- 未登录显示登录注册链接 --%>
 					<li class="nav-item"><a class="nav-link" href="/passport/reg">注册</a></li>
-					<li class="nav-item"><a class="nav-link" href="/passport/login">登录</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
+					<li class="nav-item"><a class="nav-link"
+						href="/passport/login">登录</a></li>
+				</ul>
+			</c:otherwise>
+		</c:choose>
+
 	</nav>
 </div>

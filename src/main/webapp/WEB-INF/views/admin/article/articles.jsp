@@ -28,18 +28,15 @@
 		<div class="form-group form-inline">
 			<label for="title"> 标题:</label> <input id="title" type="text"
 				class="form-control form-control-sm" name="title"
-				value="${article.title }">&nbsp;
-			文章状态:
-			<select class="form-control form-control-sm" name="status" id="status">
-			 <option value="0">待审</option>
-			 <option value="1">已审</option>
-			 <option value="-1">驳回</option>
-			 <option value="">全部</option>
-			
-			</select>	
-				
-				&nbsp;
-				
+				value="${article.title }">&nbsp; 文章状态: <select
+				class="form-control form-control-sm" name="status" id="status">
+				<option value="0">待审</option>
+				<option value="1">已审</option>
+				<option value="-1">驳回</option>
+				<option value="">全部</option>
+
+			</select> &nbsp;
+
 			<button type="button" class="btn btn-success btn-sm"
 				onclick="query()">查询</button>
 		</div>
@@ -53,6 +50,7 @@
 					<th>所属栏目</th>
 					<th>所属分类</th>
 					<th>更新时间</th>
+					<th>是否删除</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -62,22 +60,33 @@
 						<td>${(info.pageNum-1) * info.pageSize+i.index+1 }</td>
 						<td>${a.title }</td>
 						<td>${a.user.username }</td>
-						<td>
-						 <c:if test="${a.hot==0 }">
+						<td><c:if test="${a.hot==0 }">
 								<button type="button" class="btn btn-info"
 									onclick="update(this,${a.id})">否</button>
 							</c:if> <c:if test="${a.hot==1 }">
 								<button type="button" class="btn btn-success"
 									onclick="update(this,${a.id})">是</button>
 
-							</c:if>
-						
-						</td>
+							</c:if></td>
 						<td>${a.channel.name }</td>
 						<td>${a.category.name }</td>
 						<td><fmt:formatDate value="${a.updated }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td><button type="button" class="btn btn-warning" onclick="detail(${a.id})">详情 </button> </td>
+						<td><c:if test="${a.deleted==0 }">
+								<button type="button" class="btn btn-warning"
+									onclick="del(this,${a.id})">正常</button>
+							</c:if> <c:if test="${a.deleted==1 }">
+								<button type="button" class="btn btn-danger"
+									onclick="del(this,${a.id})">已删除</button>
+
+							</c:if></td>
+						<td>
+
+							<button type="button" class="btn btn-info"
+								onclick="detail(${a.id})">详情</button>
+
+
+						</td>
 					</tr>
 
 
@@ -85,8 +94,8 @@
 			</tbody>
 
 		</table>
-          <!-- 引入分页信息 -->
-		<jsp:include page="/WEB-INF/views/common/pages.jsp"/>
+		<!-- 引入分页信息 -->
+		<jsp:include page="/WEB-INF/views/common/pages.jsp" />
 
 	</div>
 
@@ -99,6 +108,28 @@
 		$("#center").load("/admin/article/article?id="+id);
 		
 	}
+	
+	
+	//删除文章
+	function del(obj,id){
+		
+		  //0:正常 1:已删除
+		  //如果当前状态为正常,则改为停用.如果是停用则改为正常
+		
+		  var deleted =$(obj).text()=="正常"?"1":"0";
+		 
+		  $.post("/admin/article/update",{id:id,deleted:deleted},function(flag){
+	        if(flag){
+	        //	alert("操作成功");
+	        	$(obj).text(deleted==0?"正常":"已删除");//先改变按钮内容
+	        	$(obj).attr("class",deleted=="1"?"btn btn-danger":"btn btn-warning")//改变按钮颜色
+	        }else{
+	        	alert("操作失败")
+	        }		  
+		  })
+		  
+	  }
+		
 	
 	
 	

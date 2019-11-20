@@ -30,6 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public boolean update(ArticleWithBLOBs article) {
 		try {
+			
 			return articleMapper.updateByPrimaryKeySelective(article)>0;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +47,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public boolean insertSelective(ArticleWithBLOBs record) {
 		try {
+			
 			return articleMapper.insertSelective(record)>0;
 		} catch (Exception e) {
 			e.printStackTrace();

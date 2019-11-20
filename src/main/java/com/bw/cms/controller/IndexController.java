@@ -34,7 +34,7 @@ public class IndexController {
 			@RequestParam(defaultValue = "5") Integer pageSize) {
 		
 		article.setStatus(1);// 显示审审核过的文章
-		
+		article.setDeleted(0);//查询未删除的
 		// 查询出左侧栏目
 
 		List<Channel> channels = channelService.selects();
@@ -45,6 +45,7 @@ public class IndexController {
 			Article hot = new Article();
 			hot.setStatus(1);// 审核过的
 			hot.setHot(1);// 热点文章
+			hot.setDeleted(0);// 
 			PageInfo<Article> info = articleService.selects(hot, page, pageSize);
 			model.addAttribute("info", info);
 		}
@@ -60,7 +61,10 @@ public class IndexController {
 		
 		//右侧边栏显示最新的5遍文章
 		
-		PageInfo<Article> lastInfo = articleService.selects(article, 1, 5);
+		Article lastArticle = new Article();
+		lastArticle.setStatus(1);//审核通过的
+		lastArticle.setDeleted(0);;//
+		PageInfo<Article> lastInfo = articleService.selects(lastArticle, 1, 5);
 		model.addAttribute("lastInfo", lastInfo);
 		
 		//封装查询条件

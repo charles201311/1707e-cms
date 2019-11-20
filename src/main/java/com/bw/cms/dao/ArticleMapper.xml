@@ -74,6 +74,10 @@
 			 <if test="hot!=null">
 				and hot=#{hot}
 			</if>
+			
+			<if test="deleted!=null">
+				and deleted=#{deleted}
+			</if>
 			<if test="channelId!=null">
 				and channel_Id=#{channelId}
 			</if>

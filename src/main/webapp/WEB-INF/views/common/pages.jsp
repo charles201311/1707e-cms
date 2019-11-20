@@ -8,7 +8,7 @@
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<c:forEach items="${info.navigatepageNums}" var="n">
-				<li class="page-item"><a class="page-link" href="javascript:goPage(${n})">${n}</a></li>
+				<li class="page-item ${n==info.pageNum?"active":""}"><a class="page-link" href="javascript:goPage(${n})">${n}</a></li>
 			</c:forEach>
 
 			<li class="page-item"><a class="page-link" href="javascript:goPage(${info.nextPage ==0?info.pages:info.nextPage})"

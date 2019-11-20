@@ -99,7 +99,8 @@ public class PassportController {
 	}
 	@PostMapping("reg")
 	public String reg(Model model ,UserVO userVO,RedirectAttributes redirectAttributes) {
-		try {
+		
+			try {
 			boolean b =userService.insertSelective(userVO);	
 			if(b) {
 				redirectAttributes.addFlashAttribute("username", userVO.getUsername());
@@ -117,4 +118,4 @@ public class PassportController {
 		
 		return "passport/reg";//注册失败
 	}
-}
+	}

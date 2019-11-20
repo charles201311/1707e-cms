@@ -108,7 +108,7 @@
 						alert("发布成功");
 						location.href="/my"
 					} else {
-						alert("发布失败")
+						alert("发布失败,可能登录过期")
 					}
 				}
 

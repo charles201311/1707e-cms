@@ -27,6 +27,8 @@
 					<th>所属栏目</th>
 					<th>所属分类</th>
 					<th>更新时间</th>
+					<th>是否删除</th>
+					<th>审核状态</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -51,6 +53,8 @@
 						<td>${a.category.name }</td>
 						<td><fmt:formatDate value="${a.updated }"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+								<td>${a.deleted==0?"正常":"管理员已删除" }</td>
+								<td>${a.status==0?"待审":a.status==1?"已审":"驳回" }</td>
 						<td><button type="button" class="btn btn-warning" onclick="detail(${a.id})">详情 </button> </td>
 					</tr>
 

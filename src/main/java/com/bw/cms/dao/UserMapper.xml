@@ -19,7 +19,8 @@
     url
   </sql>
   <select id="selectByName" resultMap="BaseResultMap">
-  select <include refid="Base_Column_List"/> from cms_user where username =#{username}
+  select <include refid="Base_Column_List"/> from cms_user
+   where username =#{username} 
   
   </select>
   
@@ -32,6 +33,7 @@
      
      </if>
    
+     
    </where>
   
   

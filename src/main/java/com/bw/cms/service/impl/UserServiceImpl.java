@@ -1,5 +1,6 @@
 package com.bw.cms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -55,9 +56,17 @@ public class UserServiceImpl implements UserService {
 			User u = userMapper.selectByName(userVO.getUsername());
 			if(null!=u)
 				 throw new CMSException("用户名不能重复注册");
+			
 			//执行注册
 			//对密码进行加密保存
 			userVO.setPassword(Md5Util.md5Encoding(userVO.getPassword()));
+			
+			//用户注册的其他属性默认值
+			userVO.setCreated(new Date());//注册时间
+			userVO.setNickname(userVO.getUsername());//昵称
+			
+			
+			
 			return userMapper.insertSelective(userVO)>0;
 		
 	}
@@ -74,12 +83,12 @@ public class UserServiceImpl implements UserService {
 		User u = userMapper.selectByName(user.getUsername());
 		if(null==u)
 			 throw new CMSException("用户名不存在");
-		else {
-			//对密码进行加密比较
-			if(!Md5Util.md5Encoding(user.getPassword()).equals(u.getPassword()))
-				throw new CMSException("密码错误!");	
+		else if(u.getLocked()==1) {
+			throw new CMSException("账户被禁用!");
 		}
-		
+		else if(!Md5Util.md5Encoding(user.getPassword()).equals(u.getPassword())) {
+			throw new CMSException("密码错误!");	
+		}
 		return u;
 	}
 
