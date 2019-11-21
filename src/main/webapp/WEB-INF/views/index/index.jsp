@@ -60,19 +60,19 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="/resource/pic/1.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/1.jpg" class="d-block w-100 rounded " alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片一</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/resource/pic/2.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/2.jpg" class="d-block w-100 rounded" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片二</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/resource/pic/3.jpg" class="d-block w-100" alt="...">
+									<img src="/resource/pic/3.jpg" class="d-block w-100 rounded" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片三</p>
 									</div>
@@ -95,7 +95,7 @@
 						<hr>
 						<c:forEach items="${info.list}" var="h">
 							<div class="media">
-								<img src="/pic/${h.picture}" class="mr-3" alt="..."
+								<img src="/pic/${h.picture}" class="mr-3 rounded" alt="..."
 									style="height: 101px; width: 156px">
 								<div class="media-body">
 									<h3>
@@ -137,7 +137,7 @@
 							<hr>
 							<c:forEach items="${info.list}" var="h">
 								<div class="media">
-									<img src="/pic/${h.picture}" class="mr-3" alt="..."
+									<img src="/pic/${h.picture}" class="mr-3 rounded" alt="..."
 										style="height: 101px; width: 156px">
 									<div class="media-body">
 										<h3>

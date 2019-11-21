@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="avatar">
+<!-- <div class="avatar">
 	<img alt="" src="/resource/images/guest.jpg" class="img-thumbnail">
-</div>
+</div> -->
 <br />
 <div>
-	<div class="list-group">
+	<div class="list-group" style="margin-left: -100px;margin-top: -40px">
 		<ul class="list-group">
-			<li  class="list-group-item  text-center list-group-item-info"   >
-			<a id="myArticle" class="channel"
+			<li id="myArticle"  class="list-group-item  text-center list-group-item-info"   >
+			<a class="channel"
 				href="javascript:void(0)"  data="/my/selectByUser"  >我的文章
 			</a></li>
 			<li class="list-group-item  text-center" ><a class="channel"
@@ -32,9 +32,6 @@
 			
 		<li class="list-group-item  text-center"><a class="channel"
 				href="javascript:void(0)" data="/article/publishVote" class="list-group-item">发起投票</a></li>
-		
-		
-		
 		
 		</ul>
 	</div>

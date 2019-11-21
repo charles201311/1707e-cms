@@ -16,21 +16,21 @@
 	<jsp:include page="/WEB-INF/views/common/top.jsp"></jsp:include>
 	<br />
 	<!-- 横幅 -->
-	<div class="container">
+	<!-- <div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12 my_banner"></div>
 		</div>
-	</div>
+	</div> -->
 	<br />
 	<!-- 主体内容区 -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
+	<div class="container" >
+		<div class="row" >
+			<div class="col-md-2">
 				<!-- 导航条 -->
 				<jsp:include page="/WEB-INF/views/my/left.jsp"></jsp:include>
 				<br />
 			</div>
-			<div class="col-md-9" id="center">
+			<div class="col-md-10" id="center"style="margin-top: -20px" >
 				 <!--引入富文本编辑器  -->
 				 <div style="display: none">
 				 <jsp:include page="/resource/kindeditor/jsp/demo.jsp"></jsp:include>
@@ -50,7 +50,7 @@
 	 //页面加载时让为左侧菜单默认点击 我的文章
 	  
 	 $("#myArticle").click();
-  //  $("#center").load("/my/articles")
+   $("#center").load("/my/selectByUser")
 	 
      
     

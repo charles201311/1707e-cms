@@ -18,7 +18,9 @@
 <script charset="utf-8" src="/resource/kindeditor/kindeditor-all.js"></script>
     
 <script charset="utf-8" src="/resource/kindeditor/lang/zh-CN.js"></script>
+
 <script src="/resource/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="/resource/js/jquery.validate.js"></script>
 
 <script>
 	KindEditor.ready(function(K) {
@@ -81,45 +83,82 @@
 		</div>
 
 		<div class="form-group">
-			<button type="button" class="btn btn-success" onclick="publish()">发布文章</button>
+			<button type="submit" class="btn btn-success">发布文章</button>
 			<button type="reset" class="btn btn-warning">重置</button>
 
 		</div>
 	</form>
 	<script type="text/javascript">
-		//发布文章
-		function publish() {
-
-			//获取formDAta对象
-			var formData = new FormData($("#form1")[0]);
-			//单独封装富文本编辑中内容(html格式的)
-			formData.set("content", editor1.html());
-
-			$.ajax({
-				type : "post",
-				url : "/my/publish",
-				data : formData,
-				// 告诉jQuery不要去处理发送的数据
-				processData : false,
-				// 告诉jQuery不要去设置Content-Type请求头
-				contentType : false,
-				success : function(flag) {
-					if (flag) {
-						alert("发布成功");
-						location.href="/my"
-					} else {
-						alert("发布失败,可能登录过期")
+		//发布前内容必须项校验
+		$(function() {
+			$("#form1").validate({
+				rules : {
+					title : {
+						required : true,
+					},
+					channelId : {
+						min : 1,
+					},
+					categoryId : {
+						min : 1
 					}
+
+				},
+				messages : {
+					title : {
+						required : "标题必须录入",
+					},
+					channelId : {
+						min : "栏目必须选择",
+					},
+					categoryId : {
+						min : "分类必须选择"
+					}
+				},
+				submitHandler : function() {
+
+					//获取formDAta对象
+					var formData = new FormData($("#form1")[0]);
+					//单独封装富文本编辑中内容(html格式的)
+					formData.set("content", editor1.html());
+
+					$.ajax({
+						type : "post",
+						url : "/my/publish",
+						data : formData,
+						// 告诉jQuery不要去处理发送的数据
+						processData : false,
+						// 告诉jQuery不要去设置Content-Type请求头
+						contentType : false,
+						success : function(flag) {
+							if (flag) {
+								alert("发布成功");
+								location.href = "/my"
+							} else {
+								alert("发布失败,可能登录过期")
+							}
+						}
+
+					})
+
 				}
 
 			})
-		}
+
+		})
+
+		/* //发布文章
+		function publish() {
+
+			$("#form1").submit();
+
+		} */
 
 		//栏目.分类的下拉框的赋值
 		$(function() {
 			//先查询出所有栏目
 			$.get("/channel/channels", function(obj) {
-				var list =obj.data;
+				var list = obj.data;
 				for ( var i in list) {
 					$("#channel").append(
 							"<option value='"+list[i].id+"'>" + list[i].name
@@ -133,6 +172,7 @@
 
 						var channelId = $(this).val();
 						$("#category").empty();
+
 						if (channelId == -1) {
 							//先清空栏目已有的值
 							$("#category").html("<option>请选择</option>");
@@ -148,7 +188,8 @@
 						$.get("/category/selects", {
 							channelId : channelId
 						}, function(obj) {
-							var list =obj.data;
+							var list = obj.data;
+							$("#category").html("<option>请选择</option>");
 							for ( var i in list) {
 								$("#category").append(
 										"<option value='"+list[i].id+"'>"

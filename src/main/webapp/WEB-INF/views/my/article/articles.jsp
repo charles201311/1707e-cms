@@ -14,8 +14,17 @@
   //文档就绪函数.让下拉框回显
 
 </script>
+<style type="text/css">
+	.ex {
+		white-space: nowrap; /*不换行的*/
+		overflow: hidden;/*超出范围隐藏*/
+		text-overflow:ellipsis; /*超出用省略号 */
+	
+	}
+
+</style>
 </head>
-<body>
+<body class="container-fluid" >
 	
 		<table class="table table-hover  table-bordered">
 			<thead class="thead-light">
@@ -36,7 +45,7 @@
 				<c:forEach items="${info.list}" var="a" varStatus="i">
 					<tr>
 						<td>${(info.pageNum-1) * info.pageSize+i.index+1 }</td>
-						<td>${a.title }</td>
+						<td><a class="ex" title="${a.title }">${a.title }</a></td>
 						<td>${a.user.username }</td>
 						<td>
 						 <c:if test="${a.hot==0 }">
