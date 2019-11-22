@@ -9,24 +9,12 @@
 <meta charset="UTF-8">
 <title>用户列表</title>
 <!-- <script type="text/javascript" src="/resource/js/cms.js"></script> -->
-<script type="text/javascript">
 
-  //文档就绪函数.让下拉框回显
 
-</script>
-<style type="text/css">
-	.ex {
-		white-space: nowrap; /*不换行的*/
-		overflow: hidden;/*超出范围隐藏*/
-		text-overflow:ellipsis; /*超出用省略号 */
-	
-	}
-
-</style>
 </head>
 <body class="container-fluid" >
 	
-		<table class="table table-hover  table-bordered">
+		<table class="table table-hover  table-bordered"  style="table-layout: fixed;">
 			<thead class="thead-light">
 				<tr>
 					<th>序号</th>
@@ -45,7 +33,7 @@
 				<c:forEach items="${info.list}" var="a" varStatus="i">
 					<tr>
 						<td>${(info.pageNum-1) * info.pageSize+i.index+1 }</td>
-						<td><a class="ex" title="${a.title }">${a.title }</a></td>
+						<td class="ex" title="${a.title}">${a.title }</td>
 						<td>${a.user.username }</td>
 						<td>
 						 <c:if test="${a.hot==0 }">

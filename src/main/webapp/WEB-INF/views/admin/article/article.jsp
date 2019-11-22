@@ -43,7 +43,7 @@
 		 $.post("/admin/article/update",{id:id,status:status},function(flag){
 			 if(flag){
 				 alert("操作成功") ;
-				  $("#center").load("/admin/article/articles")
+				 // $("#center").load("/admin/article/articles")
 			 }
 		 })
 		 

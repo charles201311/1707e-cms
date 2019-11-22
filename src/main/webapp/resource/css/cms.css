@@ -75,11 +75,8 @@ ol,ol li{padding: 0;margin: 0}
   background-color: #ff0000;
   border-color: #007bff;
 }
-
-.ex {
-		white-space: nowrap; /*不换行的*/
-		overflow: hidden;/*超出范围隐藏*/
-		text-overflow:ellipsis; /*超出用省略号 */
-	
-	}
-
+.ex{
+	white-space: nowrap; /*不换行的*/
+	overflow: hidden;/*超出范围隐藏*/
+	text-overflow:ellipsis; /*超出用省略号 */
+}

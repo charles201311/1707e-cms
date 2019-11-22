@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>用户列表</title>
+
 <!-- <script type="text/javascript" src="/resource/js/cms.js"></script> -->
 <script type="text/javascript">
 
@@ -22,6 +23,8 @@
 		$("#center").load(url);
 	}
 </script>
+
+
 </head>
 <body>
 	<div style="text-align: center;">
@@ -40,7 +43,8 @@
 			<button type="button" class="btn btn-success btn-sm"
 				onclick="query()">查询</button>
 		</div>
-		<table class="table table-hover  table-bordered">
+		<table class="table table-hover  table-bordered "
+			style="table-layout: fixed;">
 			<thead class="thead-light">
 				<tr>
 					<th>序号</th>
@@ -58,7 +62,7 @@
 				<c:forEach items="${info.list}" var="a" varStatus="i">
 					<tr>
 						<td>${(info.pageNum-1) * info.pageSize+i.index+1 }</td>
-						<td>${a.title }</td>
+						<td class="ex" title="${a.title}">${a.title }</td>
 						<td>${a.user.username }</td>
 						<td><c:if test="${a.hot==0 }">
 								<button type="button" class="btn btn-info"
@@ -82,9 +86,8 @@
 							</c:if></td>
 						<td>
 
-							<button type="button" class="btn btn-info"
-								onclick="detail(${a.id})">详情</button>
-
+							<button class="btn btn-primary" data-toggle="modal"
+								data-target="#myModal" onclick="detail(${a.id})">详情</button>
 
 						</td>
 					</tr>
@@ -97,15 +100,35 @@
 		<!-- 引入分页信息 -->
 		<jsp:include page="/WEB-INF/views/common/pages.jsp" />
 
-	</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width: 700px;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"></h4>
+					</div>
+					<div class="modal-body" id="mm"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						
+					</div>
+				</div>
+			</div>
 
 
-	<script>
+		</div>
+
+		<script>
 	
 	//文章详情
 	function detail(id){
 		
-		$("#center").load("/admin/article/article?id="+id);
+		$("#mm").load("/admin/article/article?id="+id);
 		
 	}
 	
@@ -159,6 +182,5 @@
 			  
 		  }
 	</script>
-
 </body>
 </html>
