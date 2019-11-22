@@ -8,13 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-	.ex {
-		white-space: nowrap; /*不换行的*/
-		overflow: hidden;/*超出范围隐藏*/
-		text-overflow:ellipsis; /*超出用省略号 */
-	
-	}
-
+.ex {
+	white-space: nowrap; /*不换行的*/
+	overflow: hidden; /*超出范围隐藏*/
+	text-overflow: ellipsis; /*超出用省略号 */
+}
 </style>
 <title>cms系统</title>
 <body>
@@ -60,19 +58,22 @@
 							</ol>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="/resource/pic/1.jpg" class="d-block w-100 rounded " alt="...">
+									<img src="/resource/pic/1.jpg" class="d-block w-100 rounded "
+										alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片一</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/resource/pic/2.jpg" class="d-block w-100 rounded" alt="...">
+									<img src="/resource/pic/2.jpg" class="d-block w-100 rounded"
+										alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片二</p>
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="/resource/pic/3.jpg" class="d-block w-100 rounded" alt="...">
+									<img src="/resource/pic/3.jpg" class="d-block w-100 rounded"
+										alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<p>图片三</p>
 									</div>
@@ -174,8 +175,9 @@
 					<div class="card-header">最新文章</div>
 					<div class="card-body">
 						<c:forEach items="${lastInfo.list}" var="a">
-							<p class="ex"> 
-								<a href="/article?id=${a.id }" target="_blank" title="${a.title }">${a.title }</a>
+							<p class="ex">
+								<a href="/article?id=${a.id }" target="_blank"
+									title="${a.title }">${a.title }</a>
 
 							</p>
 						</c:forEach>
@@ -184,24 +186,30 @@
 				<!-- 24小时热文 -->
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">24小时热文</div>
-					<div class="card-body">
-						
-					</div>
+					<div class="card-body"></div>
 				</div>
 
-	        <!-- 图片集 -->
+				<!-- 图片集 -->
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">图片集</div>
 					<div class="card-body">
-						
+					 <c:forEach items="${picInfo.list}" var="p">
+						<div class="media">
+							<img src="/pic/${p.picture }" class="mr-3 rounded" alt="..." style="height: 50px;width: 80px">
+							<div class="media-body">
+								<h5 class="mt-0"><a href="/articlepic?id=${p.id }"
+												target="_blank">${p.title}</a></h5>
+							
+							</div>
+						</div>
+						<hr>
+                   </c:forEach>
 					</div>
 				</div>
-				 <!-- 友情链接 -->
+				<!-- 友情链接 -->
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">友情链接</div>
-					<div class="card-body">
-						
-					</div>
+					<div class="card-body"></div>
 				</div>
 
 
@@ -215,7 +223,7 @@
 	<script type="text/javascript">
 		//分页
 		function goPage(page) {
-			var url = "/?page=" + page+"&channelId="+'${article.channelId}'
+			var url = "/?page=" + page + "&channelId=" + '${article.channelId}'
 			location = url;
 		}
 	</script>

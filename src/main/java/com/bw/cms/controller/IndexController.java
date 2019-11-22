@@ -1,5 +1,6 @@
 package com.bw.cms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,7 +17,13 @@ import com.bw.cms.domain.Channel;
 import com.bw.cms.service.ArticleService;
 import com.bw.cms.service.CategoryService;
 import com.bw.cms.service.ChannelService;
+import com.bw.cms.utils.ArticleEnum;
+import com.bw.cms.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 @Controller
 public class IndexController {
@@ -48,11 +55,12 @@ public class IndexController {
 
 		article.setStatus(1);// 显示审审核过的文章
 		article.setDeleted(0);// 查询未删除的
-
+		article.setContentType(ArticleEnum.HTML.getCode());
 		Thread t1 = null;
 		Thread t2 = null;
 		Thread t3 = null;
 		Thread t4 = null;
+		Thread t5 = null;
 
 		// 查询出左侧栏目
 		t1 = new Thread(new Runnable() {
@@ -76,6 +84,7 @@ public class IndexController {
 					hot.setStatus(1);// 审核过的
 					hot.setHot(1);// 热点文章
 					hot.setDeleted(0);//
+					hot.setContentType(ArticleEnum.HTML.getCode());
 					PageInfo<Article> info = articleService.selects(hot, page, pageSize);
 					model.addAttribute("info", info);
 				}
@@ -107,10 +116,27 @@ public class IndexController {
 				Article lastArticle = new Article();
 				lastArticle.setStatus(1);// 审核通过的
 				lastArticle.setDeleted(0);
+				lastArticle.setContentType(ArticleEnum.HTML.getCode());
 				;//
 				PageInfo<Article> lastInfo = articleService.selects(lastArticle, 1, 5);
 				model.addAttribute("lastInfo", lastInfo);
 
+			}
+		});
+		
+		t5 =new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// 右侧边栏显示最新的5遍文章
+
+				Article picArticle = new Article();
+				picArticle.setStatus(1);// 审核通过的
+				picArticle.setDeleted(0);
+				picArticle.setContentType(ArticleEnum.IMAGE.getCode());
+				PageInfo<Article> picInfo = articleService.selects(picArticle, 1, 5);
+				model.addAttribute("picInfo", picInfo);
+				
 			}
 		});
 		
@@ -121,19 +147,21 @@ public class IndexController {
 		t2.start();
 		t3.start();
 		t4.start();
+		t5.start();
 		try {
 			//让子线程先运行.主线程最后运行.返回首页
 			t1.join();
 			t2.join();
 			t3.join();
 			t4.join();
+			t5.join();
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
-		long s2 = System.currentTimeMillis();
-		System.out.println("首页用时:=============================>" + (s2 - s1));
+		//long s2 = System.currentTimeMillis();
+	//	System.out.println("首页用时:=============================>" + (s2 - s1));
 		
 		return "index/index";
 	}
@@ -151,6 +179,38 @@ public class IndexController {
 		ArticleWithBLOBs article = articleService.selectByPrimaryKey(id);
 		model.addAttribute("article", article);
 		return "index/article";
+	}
+
+	
+	/**
+	 * 
+	 * @Title: article
+	 * @Description: 文章详情
+	 * @param model
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping("articlepic")
+	public String articlepic(Model model, Integer id) {
+
+		ArticleWithBLOBs article = articleService.selectByPrimaryKey(id);
+
+		String string = article.getContent();
+
+		
+		
+		ArrayList<ArticleVO> list = new ArrayList<ArticleVO>();
+		
+		Gson gson = new Gson();
+		JsonArray array = new JsonParser().parse(string).getAsJsonArray();
+		for (JsonElement jsonElement : array) {
+			//把json转为java
+			ArticleVO vo = gson.fromJson(jsonElement, ArticleVO.class);
+			list.add(vo);
+		}
+		model.addAttribute("title", article.getTitle());// 标题
+		model.addAttribute("list", list);// 标题包含的 图片的地址和描述
+		return "index/articlepic";
 	}
 
 }

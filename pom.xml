@@ -294,13 +294,6 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.zeroturnaround</groupId>
-				<artifactId>javarebel-maven-plugin</artifactId>
-				<version>1.0.5</version>
-				
-			</plugin>
-
 
 		</plugins>
 

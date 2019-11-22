@@ -84,7 +84,9 @@
 			<if test="categoryId!=null">
 				and category_Id=#{categoryId}
 			</if>
-			
+			<if test="contentType!=null">
+				and content_Type=#{contentType}
+			</if>
 			
 		</where>
 		
