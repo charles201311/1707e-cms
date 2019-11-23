@@ -49,6 +49,7 @@ public class GlobalExceptionHandle {
 		mv.addObject("message",exception.getMessage());
 		//获取当前请求的url
 		 String url = request.getRequestURI();
+		// System.out.println(url+"=================");
 		mv.setViewName(url);//
 		return mv;
 		

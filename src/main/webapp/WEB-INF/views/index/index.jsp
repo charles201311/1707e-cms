@@ -216,9 +216,20 @@
 			</div>
 
 		</div>
+		 <!-- 友情链接 -->
+		<div class="row">
+		  
+		  <div class="col-12">
+		    <c:forEach items="${linksInfo.list}" var="l">
+		     <a href="${l.url}" target="_blank">${l.text }</a>  &nbsp;
+		    </c:forEach>
+		  
+		  
+		  </div>
+		
+		</div>
 
 	</div>
-
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		//分页

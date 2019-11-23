@@ -9,7 +9,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    <package name="com.bw.cms.domain"/>
  </typeAliases>
  
- 
  <!-- 配置分页助手拦截器 -->
 <plugins>
  <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>

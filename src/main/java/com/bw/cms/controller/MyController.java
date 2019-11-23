@@ -22,9 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bw.cms.domain.Article;
 import com.bw.cms.domain.ArticleWithBLOBs;
+import com.bw.cms.domain.Collect;
 import com.bw.cms.domain.User;
 import com.bw.cms.service.ArticleService;
+import com.bw.cms.service.CollectService;
 import com.bw.cms.utils.ArticleEnum;
+import com.bw.cms.utils.Result;
+import com.bw.cms.utils.ResultUtil;
 import com.bw.cms.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
@@ -39,10 +43,13 @@ import com.google.gson.Gson;
  */
 @RequestMapping("my")
 @Controller
-public class MyController<E> {
+public class MyController {
 
 	@Resource
 	private ArticleService articleService;
+
+	@Resource
+	private CollectService collectService;// 我的收藏
 
 	/**
 	 * 
@@ -56,6 +63,42 @@ public class MyController<E> {
 
 		return "my/index";
 
+	}
+
+	/**
+	 * 
+	 * @Title: collects
+	 * @Description: 我的收藏
+	 * @return
+	 * @return: String
+	 */
+	@GetMapping("collects")
+	public String collects(HttpServletRequest request, Model model, @RequestParam(defaultValue = "1") Integer page,
+			@RequestParam(defaultValue = "3") Integer pageSize) {
+		HttpSession session = request.getSession(false);
+
+		User user = (User) session.getAttribute("user");
+
+		PageInfo<Collect> info = collectService.selects(page, pageSize, user);
+
+		model.addAttribute("info", info);
+		return "/my/collect/collects";
+
+	}
+	
+	/**
+	 * 
+	 * @Title: deleteCollect 
+	 * @Description: 移除收藏
+	 * @param id
+	 * @return
+	 * @return: Result<Collect>
+	 */
+	@ResponseBody
+	@PostMapping("deleteCollect")
+	public Result<Collect> deleteCollect(Integer id){
+		collectService.deleteById(id);
+		return ResultUtil.success();
 	}
 
 	/**
@@ -190,11 +233,12 @@ public class MyController<E> {
 	 */
 	@ResponseBody
 	@PostMapping("publishpic")
-	public boolean publishpic(HttpServletRequest request,ArticleWithBLOBs article, MultipartFile[] files, String[] descr) {
-		
-		String newFilename=null;
-		List<ArticleVO> list =new ArrayList<ArticleVO>();//用来存放图片的地址和描述
-		int i =0;
+	public boolean publishpic(HttpServletRequest request, ArticleWithBLOBs article, MultipartFile[] files,
+			String[] descr) {
+
+		String newFilename = null;
+		List<ArticleVO> list = new ArrayList<ArticleVO>();// 用来存放图片的地址和描述
+		int i = 0;
 		for (MultipartFile file : files) {
 			ArticleVO vo = new ArticleVO();
 			if (!file.isEmpty()) {
@@ -203,13 +247,13 @@ public class MyController<E> {
 				// 为了防止文件重名.使用UUID 的方式重命名上传的文件
 				String oldFilename = file.getOriginalFilename();
 				// a.jpg
-				 newFilename = UUID.randomUUID() + oldFilename.substring(oldFilename.lastIndexOf("."));
+				newFilename = UUID.randomUUID() + oldFilename.substring(oldFilename.lastIndexOf("."));
 				File f = new File(path, newFilename);
 				vo.setUrl(newFilename);
 				vo.setDescr(descr[i]);
 				i++;
 				list.add(vo);
-				
+
 				// 写入硬盘
 				try {
 					file.transferTo(f);
@@ -219,11 +263,11 @@ public class MyController<E> {
 					e.printStackTrace();
 				}
 
-			}	
+			}
 		}
 		article.setPicture(newFilename);// 标题图片
-		Gson gson= new Gson();
-		//使用gson,把java对象转为json
+		Gson gson = new Gson();
+		// 使用gson,把java对象转为json
 		article.setContent(gson.toJson(list));
 		// 初始化设置
 		article.setStatus(0);// 待审核
@@ -238,11 +282,11 @@ public class MyController<E> {
 		article.setDeleted(0);
 		article.setCreated(new Date());
 		article.setUpdated(new Date());
-		//图片集标识
+		// 图片集标识
 		article.setContentType(ArticleEnum.IMAGE.getCode());
 
 		return articleService.insertSelective(article);
-	   
+
 	}
 
 }

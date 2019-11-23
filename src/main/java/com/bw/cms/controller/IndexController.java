@@ -4,20 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bw.cms.domain.Article;
 import com.bw.cms.domain.ArticleWithBLOBs;
 import com.bw.cms.domain.Category;
 import com.bw.cms.domain.Channel;
+import com.bw.cms.domain.Collect;
+import com.bw.cms.domain.Links;
+import com.bw.cms.domain.User;
 import com.bw.cms.service.ArticleService;
 import com.bw.cms.service.CategoryService;
 import com.bw.cms.service.ChannelService;
+import com.bw.cms.service.CollectService;
+import com.bw.cms.service.LinksService;
 import com.bw.cms.utils.ArticleEnum;
+import com.bw.cms.utils.Result;
+import com.bw.cms.utils.ResultUtil;
 import com.bw.cms.vo.ArticleVO;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
@@ -35,6 +46,10 @@ public class IndexController {
 
 	@Resource
 	private CategoryService categoryService;// 分类
+	@Resource
+	private LinksService linksService;// 分类
+	@Resource
+	private CollectService collectService;//收藏
 
 	/**
 	 * 
@@ -61,6 +76,7 @@ public class IndexController {
 		Thread t3 = null;
 		Thread t4 = null;
 		Thread t5 = null;
+		Thread t6 = null;
 
 		// 查询出左侧栏目
 		t1 = new Thread(new Runnable() {
@@ -140,6 +156,16 @@ public class IndexController {
 			}
 		});
 		
+		// 查询出左侧栏目
+		t6 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				PageInfo<Links> info = linksService.selects(1, 10);
+				model.addAttribute("linksInfo", info);
+
+			}
+		});
+		
 		// 封装查询条件
 		model.addAttribute("article", article);
 		//开启线程
@@ -148,6 +174,8 @@ public class IndexController {
 		t3.start();
 		t4.start();
 		t5.start();
+		t6.start();
+		
 		try {
 			//让子线程先运行.主线程最后运行.返回首页
 			t1.join();
@@ -155,6 +183,7 @@ public class IndexController {
 			t3.join();
 			t4.join();
 			t5.join();
+			t6.join();
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -175,8 +204,19 @@ public class IndexController {
 	 * @return: String
 	 */
 	@RequestMapping("article")
-	public String article(Model model, Integer id) {
+	public String article(Model model, Integer id,HttpServletRequest request) {
 		ArticleWithBLOBs article = articleService.selectByPrimaryKey(id);
+		
+		
+		//检查当前点击人是否登录.如果登录则根据标题和登录人查询是否收藏该文章
+		HttpSession session = request.getSession(false);
+		if(null!=session) {
+	       //
+			User user = (User) session.getAttribute("user");
+			int i = collectService.selectByText(article.getTitle(), user);
+			model.addAttribute("isCollect", i);
+		}
+	
 		model.addAttribute("article", article);
 		return "index/article";
 	}
@@ -213,4 +253,30 @@ public class IndexController {
 		return "index/articlepic";
 	}
 
+	
+	
+	/**
+	 * 
+	 * @Title: collect 
+	 * @Description: 收藏
+	 * @param collect
+	 * @return
+	 * @return: Result<Collect>
+	 */
+	@ResponseBody
+	@PostMapping("/collect")
+	public  Result<Collect> collect(Collect collect,HttpServletRequest request){
+		
+		HttpSession session = request.getSession(false);
+		if(null==session) {
+	    return ResultUtil.error(1, "收藏失败,登录可能过期");
+		}
+		User user = (User) session.getAttribute("user");
+		if(null==user) {
+		return	ResultUtil.error(1, "收藏失败,登录可能过期");
+		}
+		collect.setUser(user);
+		collectService.insert(collect);
+		return ResultUtil.success();
+	}
 }

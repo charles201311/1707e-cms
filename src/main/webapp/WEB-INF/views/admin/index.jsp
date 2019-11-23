@@ -22,8 +22,9 @@
 	<div class="container-fluid">
 		<div class="row" style="margin-top: 2px; min-height: 50px;">
 			<div class="col-md-12" style="background-color: #563d7c">
-				<img alt="" src="/resource/images/logo.jpg" class="rounded-circle" style="height: 70px;">
-				<a class="navbar-brand mr-1" href="index.html">CMS系统后台</a>
+				<img alt="" src="/resource/images/logo.jpg" class="rounded-circle"
+					style="height: 70px;"> <a class="navbar-brand mr-1"
+					href="index.html">CMS系统后台</a>
 
 				<c:choose>
 					<%-- 登录显示用户菜单 --%>
@@ -54,25 +55,25 @@
 			<div class="col-md-2"
 				style="padding-top: 20px; background-color: #563d7c;">
 				<ul class="navbar">
-					<li class="navbar-brand "><a class="nav-link  list-group-item-danger"
-						href="/admin/index"><span class="oi oi-monitor">&nbsp;后台首页</a></li>
+					<li class="navbar-brand "><a
+						class="nav-link  list-group-item-danger" href="/admin/index"><span
+							class="oi oi-monitor">&nbsp;后台首页</a></li>
 					<li class="navbar-brand"><a class="nav-link" href="#"
 						data="/admin/user/users"><span class="oi oi-star">&nbsp;用户管理</a></li>
 					<li class="navbar-brand"><a class="nav-link" href="#"
 						data="/admin/article/articles"><span class="oi oi-sun">&nbsp;文章管理</a></li>
-					<li class="navbar-brand"><a class="nav-link" href="#"><span
-							class="oi oi-paperclip">&nbsp;友情链接</a></li>
-					<li class="navbar-brand"><a class="nav-link" href="#"><span
-							class="oi oi-zoom-in">&nbsp;分类管理</a></li>
-					<li class="navbar-brand"><a class="nav-link " href="#"><span
-							class="oi oi-wrench">&nbsp;系统设置</a></li>
+					<li class="navbar-brand"><a class="nav-link" href="#"
+						data="/admin/links/selects">&nbsp;友情链接</a></li>
+					<li class="navbar-brand"><a class="nav-link" href="#">&nbsp;分类管理</a></li>
+					<li class="navbar-brand"><a class="nav-link " href="#">
+							&nbsp;系统设置</a></li>
 				</ul>
 
 
 			</div>
 
 			<div class="col-md-10 split" id="center">
-				<div align="center" >
+				<div align="center">
 					<img alt="" src="/resource/images/bg_admin.jpg"
 						class="rounded-circle">
 				</div>
