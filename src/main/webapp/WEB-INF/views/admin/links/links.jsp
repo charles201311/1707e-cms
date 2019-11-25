@@ -52,11 +52,13 @@
 
 	<script type="text/javascript">
 		function goPage(page) {
-			var url = "/admin/links/links?page=" + page;
+			var url = "/admin/links/selects?page=" + page;
 			//在中间区域加载分页页面
 			$("#center").load(url);
 
 		}
+		
+		
 	</script>
 
 </body>
